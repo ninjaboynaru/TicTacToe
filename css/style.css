@@ -1,0 +1,88 @@
+@import url('https://fonts.googleapis.com/css?family=Architects+Daughter');
+
+body {
+	font-family:"Architects Daughter", cursive, consolas;
+}
+
+.Header {
+	position:fixed;
+	left:0;
+	top:0;
+	width:100%;
+	
+	padding-top:10px;
+	padding-left:2%;
+	
+	background-color:darkgreen;
+	color:white;
+	font-size:2em;
+	font-weight:bold;
+}
+.Header .Credits {
+	position:absolute;
+	bottom:0;
+	right:0;
+	padding-right:2%;
+	font-size:50%;
+	font-family:consolas;
+}
+.Credits span {
+	color:orange;
+}
+
+
+
+#GameBoard {
+	margin:100px auto 0 auto;
+	width:350px;
+	height:350px;
+	text-align:center;
+	
+	border:22px solid #F4A460;
+	border-radius:10px;
+	background-color:#3B653D;
+}
+#GameBoard * {
+	font-family:inherit;
+	font-weight:bold;
+	color:white;
+}
+#GameBoard button {
+	cursor:pointer;
+	font-size:inherit;
+	font-style:italic;
+	
+	background-color:transparent;
+	border:none;
+}
+
+.OptionScreen {
+	font-size:2.5em;
+}
+.PlayBox {
+	display:inline-block;
+}
+.FullSize {
+	width:100%;
+	height:100%;
+}
+
+
+
+
+
+.Disabled {
+	display:none;
+}
+.VerticalCenter {
+	position:relative;
+	top:50%;
+	-ms-transform:translateY(-50%);
+	-webkit-transform:translateY(-50%);
+	transform:translateY(-50%);
+}
+
+
+
+
+
