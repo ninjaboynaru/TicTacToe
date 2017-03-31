@@ -13,7 +13,7 @@ body {
 	padding-top:10px;
 	padding-left:2%;
 	
-	background-color:darkgreen;
+	background-color:black;
 	color:white;
 	font-size:2em;
 	font-weight:bold;
@@ -34,13 +34,15 @@ body {
 
 #GameBoard {
 	margin:100px auto 0 auto;
-	width:350px;
-	height:350px;
+	width:450px;
+	height:450px;
 	text-align:center;
 	
 	border:22px solid #F4A460;
 	border-radius:10px;
 	background-color:#3B653D;
+	
+	box-shadow:0 0 40px 1px gray;
 }
 #GameBoard * {
 	font-family:inherit;
@@ -56,21 +58,50 @@ body {
 	border:none;
 }
 
+
+
+#PlayScreen table {
+	position:relative;
+	width:100%;
+	height:94.5%;
+	
+	border-collapse:collapse;
+	font-weight:bold;
+	font-size:2.5em;
+}
+#PlayScreen td {
+	border:10px solid white;
+}
+#PlayScreen tr:first-child td {
+	border-top:0;
+}
+#PlayScreen tr:last-child td {
+	border-bottom:0;
+}
+#PlayScreen tr td:first-child {
+	border-left:0;
+}
+#PlayScreen tr td:last-child {
+	border-right:0;
+}
+
+#GameInfo
+{
+	letter-spacing:2px;
+	border-bottom:2px solid white;
+}
+
 .OptionScreen {
 	font-size:2.5em;
 }
-.PlayBox {
-	display:inline-block;
-}
+
+
+
+
 .FullSize {
 	width:100%;
 	height:100%;
 }
-
-
-
-
-
 .Disabled {
 	display:none;
 }
