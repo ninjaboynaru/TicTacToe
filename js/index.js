@@ -7,6 +7,7 @@ var gameInfo =
 	player2Score: 0,
 	playerCount: 1,
 	currentPlayer: 1,
+	gameOver: false,
 	
 	SetPlayerCount: function(count)
 	{
@@ -14,26 +15,28 @@ var gameInfo =
 		{
 			count = 1;
 		}
-		playerCount = count;
+		this.playerCount = count;
 	},
 	SetPlayerShape: function(shape)
 	{
 		if(shape != "X" && shape != "O")
 		{
+			console.log("Shape has no value");
 			shape = "X";
 		}
-		if(shape == "X"){player2Shape = "O";}
-		else if(shape == "O"){player2Shape = "X";}
-		player1Shape = shape;
+		if(shape == "X"){this.player2Shape = "O";}
+		else if(shape == "O"){this.player2Shape = "X";}
+		this.player1Shape = shape;
 	},
 	Reset: function()
 	{
-		player1Shape = "X";
-		player2Shape = "O";
-		player1Score = 0;
-		player2Score = 0;
-		playerCount = 1;
-		currentPlayer = 1;
+		this.player1Shape = "X";
+		this.player2Shape = "O";
+		this.player1Score = 0;
+		this.player2Score = 0;
+		this.playerCount = 1;
+		this.currentPlayer = 1;
+		this.gameOver = false;
 	}
 }
 var screens =
@@ -45,37 +48,37 @@ var screens =
 	
 	InitializeScreens: function()
 	{
-		startScreen = document.getElementById("StartScreen");
-		countScreen = document.getElementById("CountScreen");
-		shapeScreen = document.getElementById("ShapeScreen");
-		playScreen = document.getElementById("PlayScreen");
+		this.startScreen = document.getElementById("StartScreen");
+		this.countScreen = document.getElementById("CountScreen");
+		this.shapeScreen = document.getElementById("ShapeScreen");
+		this.playScreen = document.getElementById("PlayScreen");
 	},
 	DisableAll: function()
 	{		
-		startScreen.style.display = "none";
-		countScreen.style.display = "none";
-		shapeScreen.style.display = "none";
-		playScreen.style.display = "none";
+		this.startScreen.style.display = "none";
+		this.countScreen.style.display = "none";
+		this.shapeScreen.style.display = "none";
+		this.playScreen.style.display = "none";
 	},
 	EnableStartScreen: function()
 	{
 		this.DisableAll();
-		startScreen.style.display = "block";
+		this.startScreen.style.display = "block";
 	},
 	EnableCountScreen: function()
 	{
 		this.DisableAll();
-		countScreen.style.display = "block";
+		this.countScreen.style.display = "block";
 	},
 	EnableShapeScreen: function()
 	{
 		this.DisableAll();
-		shapeScreen.style.display = "block";
+		this.shapeScreen.style.display = "block";
 	},
 	EnablePlayScreen: function()
 	{
 		this.DisableAll();
-		playScreen.style.display = "block";
+		this.playScreen.style.display = "block";
 	},
 	Reset: function()
 	{
@@ -102,17 +105,17 @@ var gameBoard = (new function(){
 		{
 			for(var x = 0; x < 3; x++)
 			{
-				this.board[i].push(tdNodes[i][x].firstChild);
+				this.board[i].push(tdNodes[i][x]);
 			}
 		}
 		
-		console.log(this.GetPureBoard() );
+		console.log(this.board);
 	}
 	
 	this.MakeMove = function(moveX, moveY, moveShape)
 	{
 		if(moveX >= 3 || moveY >= 3){return;}
-		this.board[moveY, moveX].textContent = moveShape;
+		this.board[moveY][moveX].textContent = moveShape;
 	}
 	
 	this.GetPureBoard = function() 
@@ -192,12 +195,18 @@ var gameBoard = (new function(){
 
 //------------------------------------------------------------------
 //------------------------------------------------------------------
+
 function Reset()
 {
 	gameInfo.Reset();
 	screens.Reset();
 	gameBoard.Reset();
-	
+	ResetEndMessage();
+}
+function PlayAgain()
+{
+	gameBoard.Reset();
+	ResetEndMessage();
 }
 function UpdateScoreUI()
 {
@@ -207,7 +216,7 @@ function UpdateScoreUI()
 	var player1Score1 = document.getElementById("Player1Score");
 	var player2Score = document.getElementById("Player2Score");
 	
-	if(playerCount == 1)
+	if(gameInfo.playerCount == 1)
 	{
 		player1Label.firstChild.textContent = "Player: ";
 		player2Label.firstChild.textContent = "AI: ";
@@ -222,43 +231,58 @@ function UpdateScoreUI()
 	player2Score.textContent = gameInfo.player2Score;
 }
 
-function EnableEndGameMessage(endGameMessage)
+
+function ActivateEndMessage(messageText)
 {
 	var endGameContainer = document.getElementById("EndGameMessage");
 	var endGameMessage = endGameContainer.getElementsByTagName("p")[0];
-	endGameMessage.innerText = endGameMessage;
+	endGameContainer.style.display = "block";
+	endGameMessage.innerText = messageText;
+	gameInfo.gameOver = true;
 }
+function ResetEndMessage()
+{
+	var endGameContainer = document.getElementById("EndGameMessage");
+	endGameContainer.style.display = "none";
+	gameInfo.gameOver = false;
+}
+
 
 function GameWinCheck()
 {
 	var winningShape = gameBoard.GetWinningShape();
-	if(winningShape == player1Shape)
+	if(winningShape == gameInfo.player1Shape)
 	{
 		gameInfo.player1Score += 1;
 		UpdateScoreUI();
-		EnableEndGameMessage("Player 1 Has Won");
+		ActivateEndMessage("Player 1 Has Won");
+		return true;
 	}
-	else if(winningShape == player2Shape)
+	else if(winningShape == gameInfo.player2Shape)
 	{
 		gameInfo.player2Score += 1;
 		UpdateScoreUI();
-		if(playerCount == 1)
+		if(gameInfo.playerCount == 1)
 		{
-			EnableEndGameMessage("The AI Has Won");
+			ActivateEndMessage("The AI Has Won");
 		}
 		else
 		{
-			EnableEndGameMessage("Player 2 Has Won");
+			ActivateEndMessage("Player 2 Has Won");
 		}
+		return true;
 	}
-	else
+	else if(gameBoard.MovesLeft() == false)
 	{
-		EnableEndGameMessage("Draw");
+		ActivateEndMessage("Draw");
+		return true;
 	}
+	return false;
 }
 
 function PlayBoxClick(boxNode)
 {
+	if(gameInfo.gameOver == true){return;}
 	if(boxNode.textContent == "")
 	{
 		if(gameInfo.currentPlayer == 1)	//Player 1 has made a move
@@ -267,8 +291,9 @@ function PlayBoxClick(boxNode)
 			if(gameInfo.playerCount == 1)	//Now allow AI to make a move
 			{
 				if(GameWinCheck()){return;}
-				var aiMove = AI.GetAIMove(gameBoard.GetPureBoard() );
-				gameBoard.MakeMove(aiMove.x, aiMove.y);
+				var aiMove = AI.GetAIMove(gameBoard.GetPureBoard(), gameInfo.player2Shape, gameInfo.player1Shape);
+				gameBoard.MakeMove(aiMove.x, aiMove.y, gameInfo.player2Shape);
+				
 			}
 			else{gameInfo.currentPlayer = 2;}
 		}
@@ -288,6 +313,19 @@ function GeneralSetup()
 {
 	screens.InitializeScreens();
 	gameBoard.InitializeBoard();
+	
+/* 	for(var y = 0; y < 3; y +=2 )
+	{
+		for(var x = 0; x < 2; x++)
+		{
+			gameBoard.MakeMove(x,y,"X");
+		}
+	}
+	
+	gameBoard.MakeMove(2,1,"O");
+	gameBoard.MakeMove(2,2,"O");
+	gameBoard.MakeMove(1,0,"");
+	gameBoard.MakeMove(1,2,""); */
 }
 
 

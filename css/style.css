@@ -59,17 +59,22 @@ body {
 }
 
 
-
+#PlayScreen {
+	overflow:hidden;
+}
 #PlayScreen table {
 	position:relative;
 	width:100%;
 	height:94.5%;
+	table-layout:fixed;
 	
 	border-collapse:collapse;
 	font-weight:bold;
 	font-size:2.5em;
 }
 #PlayScreen td {
+	width:30%;
+	height:30%;
 	border:10px solid white;
 }
 #PlayScreen tr:first-child td {
@@ -91,13 +96,53 @@ body {
 	border-bottom:2px solid white;
 }
 
-.OptionScreen {
-	font-size:2.5em;
+
+@-webkit-keyframes SlideIn {
+	from {left:-100%}
+	to {left:0%}
+}
+@-moz-keyframes SlideIn {
+	from {left:-100%}
+	to {left:0%}
+}
+@-o-keyframes SlideIn {
+	from {left:-100%}
+	to {left:0%}
+}
+@keyframes SlideIn {
+	from {left:-100%}
+	to {left:0%}
+}
+
+
+#EndGameMessage {
+	text-align:center;
+	position:relative;
+	top:-100%;
+	left:-100%;
+	height:100%;
+	padding:30% 0;
+	font-size:2em;
+	
+	background-color:black;
+	opacity:0.8;
+	
+	-moz-animation:SlideIn 3s;
+	-moz-animation-fill-mode:forwards;
+	-webkit-animation: SlideIn 3s;
+	-webkit-animation-fill-mode:forwards;
+	-o-animation:SlideIn 3s;
+	-o-animation-fill-mode:forwards;
 }
 
 
 
 
+
+
+.OptionScreen {
+	font-size:2.5em;
+}
 .FullSize {
 	width:100%;
 	height:100%;

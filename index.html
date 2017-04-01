@@ -29,8 +29,8 @@
 		</div>
 		<div id="ShapeScreen" class="Disabled OptionScreen">
 			<p>Player 1 select your shape</p>
-			<button onclick="gameInfo.SetPlayerShape('X');screens.EnablePlayScreen();">X</button>
-			<button onclick="gameInfo.SetPlayerShape('O');screens.EnablePlayScreen();">O</button>
+			<button onclick="gameInfo.SetPlayerShape('X');screens.EnablePlayScreen();UpdateScoreUI();">X</button>
+			<button onclick="gameInfo.SetPlayerShape('O');screens.EnablePlayScreen();UpdateScoreUI();">O</button>
 		</div>
 		<div id="PlayScreen" class="Disabled FullSize">
 			<div id="GameInfo">
@@ -57,6 +57,7 @@
 			</table>
 			<div id="EndGameMessage" class="Disabled">
 				<p>End Game Message</p>
+				<button onclick = "PlayAgain();">Play Again</button>
 			<div>
 		</div>
 	</div>
