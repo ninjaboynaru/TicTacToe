@@ -313,19 +313,6 @@ function GeneralSetup()
 {
 	screens.InitializeScreens();
 	gameBoard.InitializeBoard();
-	
-/* 	for(var y = 0; y < 3; y +=2 )
-	{
-		for(var x = 0; x < 2; x++)
-		{
-			gameBoard.MakeMove(x,y,"X");
-		}
-	}
-	
-	gameBoard.MakeMove(2,1,"O");
-	gameBoard.MakeMove(2,2,"O");
-	gameBoard.MakeMove(1,0,"");
-	gameBoard.MakeMove(1,2,""); */
 }
 
 

@@ -53,7 +53,7 @@ var AI = {
 	},
 
 	//A Minimax function
-	MoveValue: function(xCord,yCord, pureBoard, aiCharacter, playerCharacter, depth, isAITurn, debug)
+	MoveValue: function(xCord,yCord, pureBoard, aiCharacter, playerCharacter, depth, isAITurn)
 	{
 		if(isAITurn == undefined){isAITurn = true;}
 		if(depth == undefined){depth = 0;}
@@ -93,11 +93,11 @@ var AI = {
 				{
 					if(isAITurn)
 					{
-						moveValue = Math.min(moveValue, this.MoveValue(x,y, pureBoard, aiCharacter, playerCharacter, depth+1, !isAITurn, debug) );
+						moveValue = Math.min(moveValue, this.MoveValue(x,y, pureBoard, aiCharacter, playerCharacter, depth+1, !isAITurn) );
 					}
 					else
 					{
-						moveValue = Math.max(moveValue, this.MoveValue(x,y, pureBoard, aiCharacter, playerCharacter, depth+1, !isAITurn, debug) );
+						moveValue = Math.max(moveValue, this.MoveValue(x,y, pureBoard, aiCharacter, playerCharacter, depth+1, !isAITurn) );
 					}
 				}
 			}

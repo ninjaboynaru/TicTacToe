@@ -22,16 +22,19 @@
 			<p>TIC-TAC-TOE</p>
 			<button onClick="screens.EnableCountScreen();">Start</button>
 		</div>
+		
 		<div id="CountScreen" class="Disabled OptionScreen">
 			<p>How many players?</p>
 			<button onclick="gameInfo.SetPlayerCount(1);screens.EnableShapeScreen();">1</button>
 			<button onclick="gameInfo.SetPlayerCount(2);screens.EnableShapeScreen();">2</button>
 		</div>
+		
 		<div id="ShapeScreen" class="Disabled OptionScreen">
 			<p>Player 1 select your shape</p>
 			<button onclick="gameInfo.SetPlayerShape('X');screens.EnablePlayScreen();UpdateScoreUI();">X</button>
 			<button onclick="gameInfo.SetPlayerShape('O');screens.EnablePlayScreen();UpdateScoreUI();">O</button>
 		</div>
+		
 		<div id="PlayScreen" class="Disabled FullSize">
 			<div id="GameInfo">
 				<span id="Player1ScoreLabel">Player: <span id="Player1Score">0</span> </span>
@@ -58,7 +61,7 @@
 			<div id="EndGameMessage" class="Disabled">
 				<p>End Game Message</p>
 				<button onclick = "PlayAgain();">Play Again</button>
-			<div>
+			</div>
 		</div>
 	</div>
 	
