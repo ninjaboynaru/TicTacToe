@@ -41,10 +41,7 @@ calls "MoveValue(..)"(itself) on those sub moves.
 "pureBoard" parameter is a 3x3 array of strings [[] [] []] where sub array is a row on
 the game baord and the contents of the row are strings "X" "O" or "".
 "gameBoard.GetPureBoard()" supplies the pureBoard to the AI.
-
 _________________________________________________________________________________
-
-See TECHNICAL_NOTES word file for strange observations and notes. Or don't.
 
 
 
