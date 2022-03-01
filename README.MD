@@ -1,8 +1,9 @@
 # TIC-TAC-TOE
 You neighborhood friendly TIC-TOE-GAME.
 
-
 HTML CS JS Project with animations and JS AI.
+
+[Play It Here](https://ninjaboynaru.github.io/TicTacToe/)
 
 ## AI
 Minimax algorithm is used for the AI. There is no difficulty modifier or depth check so the AI plays a perfect game
